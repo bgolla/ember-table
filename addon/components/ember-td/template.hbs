@@ -2,22 +2,27 @@
   <div class="et-cell-container">
     {{#if this.canSelect}}
       <span
-        class="et-toggle-select {{unless this.shouldShowCheckbox 'et-speech-only'}}"
+        class="et-toggle-select {{unless this.shouldShowCheckbox "et-speech-only"}}"
         data-test-select-row-container
       >
-        {{ember-table-simple-checkbox
+        {{component
+          this.api.checkboxComponent
+          data-test-select-row=true
           checked=this.rowMeta.isGroupSelected
           onClick=(action "onSelectionToggled")
           ariaLabel="Select row"
           dataTestSelectRow=this.isTesting
         }}
+
         <span></span>
       </span>
     {{/if}}
 
     {{#if this.canCollapse}}
       <span class="et-toggle-collapse et-depth-indent {{this.depthClass}}">
-        {{ember-table-simple-checkbox
+        {{component
+          this.api.checkboxComponent
+          data-test-collapse-row=true
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
           ariaLabel="Collapse row"
@@ -31,7 +36,15 @@
 
     <div class="et-cell-content">
       {{#if (has-block)}}
-        {{yield this.cellValue this.columnValue this.rowValue this.cellMeta this.columnMeta this.rowMeta this.rowsCount}}
+        {{yield
+          this.cellValue
+          this.columnValue
+          this.rowValue
+          this.cellMeta
+          this.columnMeta
+          this.rowMeta
+          this.rowsCount
+        }}
       {{else}}
         {{this.cellValue}}
       {{/if}}
@@ -39,7 +52,15 @@
   </div>
 {{else}}
   {{#if (has-block)}}
-    {{yield this.cellValue this.columnValue this.rowValue this.cellMeta this.columnMeta this.rowMeta this.rowsCount}}
+    {{yield
+      this.cellValue
+      this.columnValue
+      this.rowValue
+      this.cellMeta
+      this.columnMeta
+      this.rowMeta
+      this.rowsCount
+    }}
   {{else}}
     {{this.cellValue}}
   {{/if}}
