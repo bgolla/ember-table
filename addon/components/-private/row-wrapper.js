@@ -76,6 +76,7 @@ export default Component.extend({
       let columns = this.get('columns');
       let numColumns = get(columns, 'length');
 
+      let checkboxComponent = this.get('checkboxComponent');
       let rowValue = this.get('rowValue');
       let rowMeta = this.get('rowMeta');
       let canSelect = this.get('canSelect');
@@ -106,6 +107,7 @@ export default Component.extend({
           rowMeta,
           rowSelectionMode,
           rowValue,
+          checkboxComponent,
         });
       });
 

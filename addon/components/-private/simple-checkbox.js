@@ -17,13 +17,14 @@ export default Component.extend({
   checked: defaultTo(false),
   disabled: defaultTo(false),
   indeterminate: defaultTo(false),
-  onChange: null,
-  onClick: null,
+  onChange: () => {},
+  onClick: () => {},
   type: 'checkbox',
   value: null,
 
   click(event) {
-    this.sendAction('onClick', event);
+    event.stopImmediatePropagation();
+    this.onClick(event);
   },
 
   change(event) {
@@ -35,7 +36,6 @@ export default Component.extend({
     // Reset the change, send the action and wait for it to be changed manually
     this.element.checked = this.get('checked');
     this.element.indeterminate = this.get('indeterminate');
-
-    this.sendAction('onChange', checked, { value, indeterminate }, event);
+    this.onChange(checked, { value, indeterminate }, event);
   },
 });

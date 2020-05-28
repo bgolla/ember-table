@@ -13,6 +13,7 @@ import {
 } from '../../-private/sticky/table-sticky-polyfill';
 
 import layout from './template';
+import defaultTo from '../../-private/utils/default-to';
 
 /**
   The primary Ember Table component. This component represents the root of the
@@ -41,6 +42,8 @@ export default Component.extend({
   userAgent: service(),
 
   'data-test-ember-table': true,
+
+  checkboxComponent: defaultTo('-ember-table-private/simple-checkbox'),
 
   didInsertElement() {
     this._super(...arguments);
@@ -92,6 +95,7 @@ export default Component.extend({
       columns: null,
       registerColumnTree: this.registerColumnTree.bind(this),
       tableId: this.elementId,
+      checkboxComponent: this.checkboxComponent,
     };
   }),
 

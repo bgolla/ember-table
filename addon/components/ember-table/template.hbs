@@ -1,8 +1,11 @@
 <table>
-  {{yield (hash
-    api=api
-    head=(component "ember-thead" api=api)
-    body=(component "ember-tbody" api=api)
-    foot=(component "ember-tfoot" api=api)
-  )}}
+  {{
+    yield
+    (hash
+      api=api
+      head=(component 'ember-thead' api=this.api)
+      body=(component 'ember-tbody' api=this.api)
+      foot=(component 'ember-tfoot' api=this.api)
+    )
+  }}
 </table>
