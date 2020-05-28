@@ -1,23 +1,29 @@
 {{#if this.isFirstColumn}}
-  <div class="et-cell-container">
+  <div class="et-cell-container {{if (and this.isFirstColumn this.canSelect) 'flex items-center'}}">
     {{#if this.canSelect}}
       <span
         class="et-toggle-select {{unless this.shouldShowCheckbox 'et-speech-only'}}"
         data-test-select-row-container
       >
-        {{ember-table-simple-checkbox
+        {{
+          component
+          this.api.checkboxComponent
           checked=this.rowMeta.isGroupSelected
           onClick=(action "onSelectionToggled")
+          onChange=(action 'onSelectionToggled')
           ariaLabel="Select row"
           dataTestSelectRow=this.isTesting
         }}
+
         <span></span>
       </span>
     {{/if}}
 
     {{#if this.canCollapse}}
       <span class="et-toggle-collapse et-depth-indent {{this.depthClass}}">
-        {{ember-table-simple-checkbox
+        {{
+          component
+          this.api.checkboxComponent
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
           ariaLabel="Collapse row"
@@ -29,7 +35,7 @@
       <div class="et-depth-indent et-depth-placeholder {{this.depthClass}}"></div>
     {{/if}}
 
-    <div class="et-cell-content">
+    <div class="flex-1 et-cell-content">
       {{#if (has-block)}}
         {{yield this.cellValue this.columnValue this.rowValue this.cellMeta this.columnMeta this.rowMeta this.rowsCount}}
       {{else}}
