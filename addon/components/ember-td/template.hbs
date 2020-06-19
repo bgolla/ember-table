@@ -13,7 +13,6 @@
           ariaLabel="Select row"
           dataTestSelectRow=this.isTesting
         }}
-
         <span></span>
       </span>
     {{/if}}
@@ -25,6 +24,8 @@
           data-test-collapse-row=true
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
+          isCollapsed=rowMeta.isCollapsed
+          onClick=(action "onCollapseToggled")
           ariaLabel="Collapse row"
           dataTestCollapseRow=this.isTesting
         }}
@@ -33,9 +34,8 @@
     {{else}}
       <div class="et-depth-indent et-depth-placeholder {{this.depthClass}}"></div>
     {{/if}}
-
-    <div class="et-cell-content">
-      {{#if (has-block)}}
+    <div class="flex-1 et-cell-content">
+      {{#if hasBlock}}
         {{yield
           this.cellValue
           this.columnValue
@@ -50,6 +50,8 @@
       {{/if}}
     </div>
   </div>
+{{else if hasBlock}}
+  {{yield cellValue columnValue rowValue cellMeta columnMeta rowMeta}}
 {{else}}
   {{#if (has-block)}}
     {{yield
