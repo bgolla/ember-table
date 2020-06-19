@@ -1,20 +1,18 @@
 {{#if this.isFirstColumn}}
-  <div class="et-cell-container {{if (and this.isFirstColumn this.canSelect) 'flex items-center'}}">
+  <div class="et-cell-container {{if (and this.isFirstColumn this.canSelect) "flex items-center"}}">
     {{#if this.canSelect}}
       <span
-        class="et-toggle-select {{unless this.shouldShowCheckbox 'et-speech-only'}}"
+        class="et-toggle-select {{unless this.shouldShowCheckbox "et-speech-only"}}"
         data-test-select-row-container
       >
-        {{
-          component
+        {{component
           this.api.checkboxComponent
-          checked=this.rowMeta.isGroupSelected
+          data-test-select-row=true
+          checked=rowMeta.isGroupSelected
           onClick=(action "onSelectionToggled")
-          onChange=(action 'onSelectionToggled')
+          onChange=(action "onSelectionToggled")
           ariaLabel="Select row"
-          dataTestSelectRow=this.isTesting
         }}
-
         <span></span>
       </span>
     {{/if}}
@@ -23,9 +21,11 @@
       <span class="et-toggle-collapse et-depth-indent {{this.depthClass}}">
         {{
           component
-          this.api.checkboxComponent
+          this.api.toggleComponent
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
+          isCollapsed=rowMeta.isCollapsed
+          onClick=(action "onCollapseToggled")
           ariaLabel="Collapse row"
           dataTestCollapseRow=this.isTesting
         }}

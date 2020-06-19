@@ -22,7 +22,8 @@
     rowSelectionMode=this.rowSelectionMode
     rowToggleMode=this.rowToggleMode
     rowsCount=this.wrappedRows.length
-    checkboxComponent=this.unwrappedApi.checkboxComponent as |api|
+    checkboxComponent=this.unwrappedApi.checkboxComponent 
+    toggleComponent=this.unwrappedApi.toggleComponent as |api|
   }}
     {{#if (has-block)}}
       {{yield
