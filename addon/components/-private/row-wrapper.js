@@ -77,6 +77,7 @@ export default Component.extend({
       let numColumns = get(columns, 'length');
 
       let checkboxComponent = this.get('checkboxComponent');
+      let toggleComponent = this.get('toggleComponent');
       let rowValue = this.get('rowValue');
       let rowMeta = this.get('rowMeta');
       let canSelect = this.get('canSelect');
@@ -108,6 +109,7 @@ export default Component.extend({
           rowSelectionMode,
           rowValue,
           checkboxComponent,
+          toggleComponent,
         });
       });
 
