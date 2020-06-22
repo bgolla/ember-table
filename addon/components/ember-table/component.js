@@ -44,6 +44,7 @@ export default Component.extend({
   'data-test-ember-table': true,
 
   checkboxComponent: defaultTo('-ember-table-private/simple-checkbox'),
+  toggleComponent: defaultTo('-ember-table-private/simple-checkbox'),
 
   didInsertElement() {
     this._super(...arguments);
@@ -96,6 +97,7 @@ export default Component.extend({
       registerColumnTree: this.registerColumnTree.bind(this),
       tableId: this.elementId,
       checkboxComponent: this.checkboxComponent,
+      toggleComponent: this.toggleComponent,
     };
   }),
 
