@@ -4,10 +4,6 @@ import { htmlSafe } from '@ember/string';
 import { inject as service } from '@ember/service';
 
 import {
-  setupLegacyStickyPolyfill,
-  teardownLegacyStickyPolyfill,
-} from '../../-private/sticky/legacy-sticky-polyfill';
-import {
   setupTableStickyPolyfill,
   teardownTableStickyPolyfill,
 } from '../../-private/sticky/table-sticky-polyfill';
@@ -49,39 +45,27 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    let browser = this.get('userAgent.browser');
+    let thead = this.element.querySelector('thead');
+    let tfoot = this.element.querySelector('tfoot');
 
-    if (browser.isIE) {
-      setupLegacyStickyPolyfill(this.element);
-    } else {
-      let thead = this.element.querySelector('thead');
-      let tfoot = this.element.querySelector('tfoot');
-
-      if (thead) {
-        setupTableStickyPolyfill(thead);
-      }
-      if (tfoot) {
-        setupTableStickyPolyfill(tfoot);
-      }
+    if (thead) {
+      setupTableStickyPolyfill(thead);
+    }
+    if (tfoot) {
+      setupTableStickyPolyfill(tfoot);
     }
   },
 
   willDestroyElement() {
-    let browser = this.get('userAgent.browser');
+    let thead = this.element.querySelector('thead');
+    let tfoot = this.element.querySelector('tfoot');
 
-    if (browser.isIE) {
-      teardownLegacyStickyPolyfill(this.element);
-    } else {
-      let thead = this.element.querySelector('thead');
-      let tfoot = this.element.querySelector('tfoot');
+    if (thead) {
+      teardownTableStickyPolyfill(this.element.querySelector('thead'));
+    }
 
-      if (thead) {
-        teardownTableStickyPolyfill(this.element.querySelector('thead'));
-      }
-
-      if (tfoot) {
-        teardownTableStickyPolyfill(this.element.querySelector('tfoot'));
-      }
+    if (tfoot) {
+      teardownTableStickyPolyfill(this.element.querySelector('tfoot'));
     }
 
     this._super(...arguments);
