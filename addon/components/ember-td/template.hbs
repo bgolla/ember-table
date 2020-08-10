@@ -5,13 +5,14 @@
         class="et-toggle-select {{unless this.shouldShowCheckbox "et-speech-only"}}"
         data-test-select-row-container
       >
-        {{component
+        {{
+          component
           this.api.checkboxComponent
           data-test-select-row=true
           checked=rowMeta.isGroupSelected
-          onClick=(action "onSelectionToggled")
-          onChange=(action "onSelectionToggled")
-          ariaLabel="Select row"
+          onClick=(action 'onSelectionToggled')
+          onChange=(action 'onSelectionToggled')
+          ariaLabel='Select row'
         }}
         <span></span>
       </span>
