@@ -94,6 +94,7 @@ export default Component.extend({
   */
   selection: null,
 
+  selectionMatcher: null,
   /**
     An action that is called when the row selection of the table changes.
     Will be called with either an array or individual row, depending on the
@@ -282,6 +283,7 @@ export default Component.extend({
     'enableCollapse',
     'enableTree',
     'selection',
+    'selectionMatcher',
     'selectingChildrenSelectsParent',
     'onSelect',
 
@@ -294,6 +296,7 @@ export default Component.extend({
       this.collapseTree.set('enableCollapse', this.get('enableCollapse'));
       this.collapseTree.set('enableTree', this.get('enableTree'));
       this.collapseTree.set('selection', this.get('selection'));
+      this.collapseTree.set('selectionMatcher', this.get('selectionMatcher'));
       this.collapseTree.set(
         'selectingChildrenSelectsParent',
         this.get('selectingChildrenSelectsParent')

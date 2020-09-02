@@ -44,7 +44,7 @@ export const TableRowMeta = EmberObject.extend({
     },
   }),
 
-  isSelected: computed('_tree.selection.[]', '_parentMeta.isSelected', function() {
+  isSelected: computed('_tree.selection.[]', '_parentMeta.isSelected', '_tree.selectionMatcher', function() {
     let rowValue = get(this, '_rowValue');
     let selection = get(this, '_tree.selection');
 
@@ -52,18 +52,21 @@ export const TableRowMeta = EmberObject.extend({
       return this.get('isGroupSelected');
     }
 
-    return selection === rowValue || get(this, '_parentMeta.isSelected');
+    let matcher = get(this, '_tree.selectionMatcher') || ((left, right) => left === right);
+
+    return matcher(selection, rowValue) || get(this, '_parentMeta.isSelected');
   }),
 
-  isGroupSelected: computed('_tree.selection.[]', '_parentMeta.isSelected', function() {
+  isGroupSelected: computed('_tree.selection.[]', '_parentMeta.isSelected',  '_tree.selectionMatcher', function() {
     let rowValue = get(this, '_rowValue');
     let selection = get(this, '_tree.selection');
-
     if (!selection || !isArray(selection)) {
       return false;
     }
 
-    return selection.includes(rowValue) || get(this, '_parentMeta.isGroupSelected');
+    let matcher = get(this, '_tree.selectionMatcher');
+    return selection.includes(rowValue) || get(this, '_parentMeta.isGroupSelected') ||
+    selection.some((s) => matcher(s, rowValue));
   }),
 
   canCollapse: computed(
