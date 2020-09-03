@@ -64,7 +64,7 @@ export const TableRowMeta = EmberObject.extend({
       return false;
     }
 
-    let matcher = get(this, '_tree.selectionMatcher');
+    let matcher = get(this, '_tree.selectionMatcher') || (() => false);
     return selection.includes(rowValue) || get(this, '_parentMeta.isGroupSelected') ||
     selection.some((s) => matcher(s, rowValue));
   }),
