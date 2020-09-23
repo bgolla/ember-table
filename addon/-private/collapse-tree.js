@@ -152,7 +152,8 @@ export const TableRowMeta = EmberObject.extend({
 
     if (single) {
       tree._lastSelectedIndex = null;
-      tree.sendAction('onSelect', rowValue);
+      // tree.sendAction('onSelect', rowValue);
+      tree.onSelectX(rowValue);
       return;
     }
 
@@ -178,6 +179,8 @@ export const TableRowMeta = EmberObject.extend({
       if (isGroupSelected) {
         let meta = this;
         let currentValue = rowValue;
+         // match items via selectionMatcher
+        let itemMatcher = get(this, '_tree.selectionMatcher') || ((left, right) => left === right);
 
         // If the parent is selected all of its children are selected. Since
         // the current row is going to be removed from the selection, add all
@@ -219,11 +222,13 @@ export const TableRowMeta = EmberObject.extend({
             selection.add(child);
           }
 
-          selection.delete(currentValue);
+          let matchedCurrentValue = oldSelection.find((item) => itemMatcher(item, currentValue))
+          selection.delete(matchedCurrentValue);
           currentValue = get(meta, '_rowValue');
         }
 
-        selection.delete(currentValue);
+        let matchedCurrentValue = oldSelection.find((item) => itemMatcher(item, currentValue))
+        selection.delete(matchedCurrentValue);
       } else {
         selection.add(rowValue);
       }
@@ -265,8 +270,8 @@ export const TableRowMeta = EmberObject.extend({
 
     selection = emberA(Array.from(selection));
 
-    tree.sendAction('onSelect', selection);
-
+    // tree.sendAction('onSelect', selection);
+    tree.onSelectX(selection);
     tree._lastSelectedIndex = rowIndex;
   },
 

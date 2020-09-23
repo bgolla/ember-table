@@ -297,6 +297,7 @@ export default Component.extend({
       this.collapseTree.set('enableTree', this.get('enableTree'));
       this.collapseTree.set('selection', this.get('selection'));
       this.collapseTree.set('selectionMatcher', this.get('selectionMatcher'));
+      this.collapseTree.set('onSelectX', this.get('onSelect') || (() => {}));
       this.collapseTree.set(
         'selectingChildrenSelectsParent',
         this.get('selectingChildrenSelectsParent')
