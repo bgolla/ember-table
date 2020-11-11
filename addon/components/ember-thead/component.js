@@ -318,7 +318,10 @@ export default Component.extend({
   ),
 
   sendUpdateSort(newSorts) {
-    this.sendAction('onUpdateSorts', newSorts);
+    let onUpdateSorts = this.get('onUpdateSorts') || (() => {});
+    onUpdateSorts(newSorts);
+    // AK: removed use of deprecated sendAction API
+    // this.sendAction('onUpdateSorts', newSorts);
   },
 
   fillupHandler() {
