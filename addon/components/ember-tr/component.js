@@ -120,7 +120,7 @@ export default Component.extend({
   doubleClick(event, action) {
     let rowValue = this.get('rowValue');
     let rowMeta = this.get('rowMeta');
-
+    let action = 'onDoubleClick';
     let closureAction = this[action];
 
     closureAction?.({
