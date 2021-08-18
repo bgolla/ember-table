@@ -1,43 +1,49 @@
-{{#if isFirstColumn}}
-  <div class="et-cell-container {{if (and isFirstColumn canSelect) 'flex items-center'}}">
+{{#if this.isFirstColumn}}
+  <div class="et-cell-container">
     {{#if this.canSelect}}
       <span
-        class="et-toggle-select {{unless this.shouldShowCheckbox 'et-speech-only'}}"
+        class="et-toggle-select {{unless this.shouldShowCheckbox "et-speech-only"}}"
         data-test-select-row-container
       >
-        {{
-          component
+        {{component
           this.api.checkboxComponent
           data-test-select-row=true
-          checked=rowMeta.isGroupSelected
-          onChange=(action 'onSelectionToggled')
-          ariaLabel='Select row'
+          checked=this.rowMeta.isGroupSelected
+          onClick=(action "onSelectionToggled")
+          ariaLabel="Select row"
         }}
         <span></span>
       </span>
     {{/if}}
     {{#if canCollapse}}
-      <span class="et-toggle-collapse et-depth-indent {{depthClass}}">
-        {{
-          component
+      <span class="et-toggle-collapse et-depth-indent {{this.depthClass}}">
+        {{component
           this.api.toggleComponent
           data-test-collapse-row=true
-          checked=rowMeta.isCollapsed
+          checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
           isCollapsed=rowMeta.isCollapsed
-          onClick=(action 'onCollapseToggled')
-          ariaLabel='Collapse row'
+          onClick=(action "onCollapseToggled")
+          ariaLabel="Collapse row"
         }}
         <span></span>
       </span>
     {{else}}
-      <div class="et-depth-indent et-depth-placeholder {{depthClass}}"></div>
+      <div class="et-depth-indent et-depth-placeholder {{this.depthClass}}"></div>
     {{/if}}
-    <div class='flex-1 et-cell-content'>
+    <div class="flex-1 et-cell-content">
       {{#if hasBlock}}
-        {{yield cellValue columnValue rowValue cellMeta columnMeta rowMeta rowsCount}}
+        {{yield
+          this.cellValue
+          this.columnValue
+          this.rowValue
+          this.cellMeta
+          this.columnMeta
+          this.rowMeta
+          this.rowsCount
+        }}
       {{else}}
-        {{cellValue}}
+        {{this.cellValue}}
       {{/if}}
     </div>
   </div>
@@ -45,8 +51,16 @@
   {{yield cellValue columnValue rowValue cellMeta columnMeta rowMeta}}
 {{else}}
   {{#if hasBlock}}
-    {{yield cellValue columnValue rowValue cellMeta columnMeta rowMeta rowsCount}}
+    {{yield
+      this.cellValue
+      this.columnValue
+      this.rowValue
+      this.cellMeta
+      this.columnMeta
+      this.rowMeta
+      this.rowsCount
+    }}
   {{else}}
-    {{cellValue}}
+    {{this.cellValue}}
   {{/if}}
 {{/if}}
