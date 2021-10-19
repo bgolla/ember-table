@@ -117,7 +117,7 @@ export default Component.extend({
     this.onClick({ event, rowValue, rowMeta });
   },
 
-  doubleClick(event, action) {
+  doubleClick(event) {
     let rowValue = this.get('rowValue');
     let rowMeta = this.get('rowMeta');
     let action = 'onDoubleClick';
