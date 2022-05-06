@@ -41,7 +41,6 @@ const fullTable = hbs`
           />
         </EmberTr>
       </EmberThead>
-
       <EmberTbody
         @api={{t}}
         @rows={{this.rows}}

@@ -16,15 +16,14 @@
         <span></span>
       </span>
     {{/if}}
-
+    this.canCollapse{{this.canCollapse}}
     {{#if this.canCollapse}}
       <span class="et-toggle-collapse et-depth-indent {{this.depthClass}}">
         {{component
-          this.api.checkboxComponent
+          this.api.toggleComponent
           data-test-collapse-row=true
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
-          isCollapsed=this.rowMeta.isCollapsed
           onClick=(action "onCollapseToggled")
           ariaLabel="Collapse row"
           dataTestCollapseRow=this.isTesting

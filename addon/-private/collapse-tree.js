@@ -193,7 +193,7 @@ export const TableRowMeta = EmberObject.extend({
       let maxIndex = isFirstIndexDefined ? Math.max(_lastSelectedIndex, rowIndex) : rowIndex;
 
       for (let i = minIndex; i <= maxIndex; i++) {
-        if(tree.objectAt(i).isParent){
+        if (tree.objectAt(i).isParent) {
           continue;
         }
         selection.add(tree.objectAt(i));
