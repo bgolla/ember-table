@@ -36,8 +36,8 @@ export default Component.extend({
   attributeBindings: ['dataTestEmberTable:data-test-ember-table'],
   dataTestEmberTable: true,
 
-  checkboxComponent: defaultTo('-ember-table-private/simple-checkbox'),
-  toggleComponent: defaultTo('-ember-table-private/simple-checkbox'),
+  checkboxComponent: defaultTo('ember-table-simple-checkbox'),
+  toggleComponent: defaultTo('ember-table-simple-checkbox'),
 
   didInsertElement() {
     this._super(...arguments);

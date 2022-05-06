@@ -24,7 +24,7 @@
           data-test-collapse-row=true
           checked=this.rowMeta.isCollapsed
           onChange=(action "onCollapseToggled")
-          isCollapsed=rowMeta.isCollapsed
+          isCollapsed=this.rowMeta.isCollapsed
           onClick=(action "onCollapseToggled")
           ariaLabel="Collapse row"
           dataTestCollapseRow=this.isTesting
@@ -51,7 +51,7 @@
     </div>
   </div>
 {{else if hasBlock}}
-  {{yield cellValue columnValue rowValue cellMeta columnMeta rowMeta}}
+  {{yield this.cellValue this.columnValue this.rowValue this.cellMeta this.columnMeta this.rowMeta}}
 {{else}}
   {{#if (has-block)}}
     {{yield

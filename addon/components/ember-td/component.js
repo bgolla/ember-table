@@ -122,7 +122,7 @@ export default BaseTableCell.extend({
   }),
 
   actions: {
-    onSelectionToggled(_, event) {
+    onSelectionToggled(event) {
       let rowMeta = this.get('rowMeta');
       let checkboxSelectionMode = this.get('checkboxSelectionMode') || this.get('rowSelectionMode');
 
